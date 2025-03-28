@@ -27,3 +27,12 @@ def get_top_words(word_freq, top_n=10):
     sorted_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
     return sorted_words[:top_n]
 
+def write_results(top_words, output_file):
+    """Записує результати у вихідний файл у форматі 'слово-кількість'."""
+    try:
+        with open(output_file, 'w', encoding='utf-8') as file:
+            for word, count in top_words:
+                file.write(f"{word}-{count}\n")
+        print(f"Результати записано у файл {output_file}")
+    except Exception as e:
+        print(f"Помилка при записі у файл: {e}")
