@@ -1,5 +1,5 @@
 import pytest
-from main import read_file
+from main import read_file, count_words
 
 @pytest.fixture
 def temp_input_file(tmp_path):
@@ -26,3 +26,13 @@ def test_read_file(temp_input_file):
 def test_read_file_not_found():
     content = read_file("non_existent_file.txt")
     assert content == ""
+
+@pytest.mark.parametrize("text, expected", [
+    ("ще ще україна", {"ще": 2, "україна": 1}),
+    ("браття, браття. браття!", {"браття": 3}),
+    ("", {}),
+    ("воля воля ВОЛЯ", {"воля": 3}),
+])
+def test_count_words(text, expected):
+    result = count_words(text)
+    assert result == expected
