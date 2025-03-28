@@ -58,3 +58,12 @@ def test_write_results(temp_output_file):
     with open(temp_output_file, 'r', encoding='utf-8') as f:
         content = f.read().strip()
     assert content == "україна-3\nще-2"
+
+def test_main_integration(temp_input_file, temp_output_file):
+    from main import main
+    main(temp_input_file, temp_output_file)
+    
+    with open(temp_output_file, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+    assert len(lines) <= 10  
+    assert all(line.strip().split('-')[1].isdigit() for line in lines)  
