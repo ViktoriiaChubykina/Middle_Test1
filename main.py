@@ -36,3 +36,21 @@ def write_results(top_words, output_file):
         print(f"Результати записано у файл {output_file}")
     except Exception as e:
         print(f"Помилка при записі у файл: {e}")
+
+def main(input_file, output_file):
+    """Основна функція для обробки файлу та запису результатів."""
+
+    text = read_file(input_file)
+    if not text:
+        return
+    
+    word_freq = count_words(text)
+
+    top_words = get_top_words(word_freq)
+
+    write_results(top_words, output_file)
+
+if __name__ == "__main__":
+    input_file = "input.txt"
+    output_file = "output.txt"
+    main(input_file, output_file)
