@@ -22,3 +22,8 @@ def count_words(text):
             
     return word_freq
 
+def get_top_words(word_freq, top_n=10):
+    """Повертає список із top_n найпопулярніших слів у форматі (слово, кількість)."""
+    sorted_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
+    return sorted_words[:top_n]
+
